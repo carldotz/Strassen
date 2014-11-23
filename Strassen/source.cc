@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstdlib>
+#include "Matrix.h"
 
 using std::cout;
 using std::endl;
@@ -17,6 +17,12 @@ int input2[4][4] = {
 	{4, 3, 2, 1}};
 
 int main() {
-//	strassen(input1[0], input2[0], NULL, 4);
+	Matrix inputM1(input1[0], 4);
+	Matrix inputM2(input2[0], 4);
+	cout << "Input A is:\n" << inputM1 << endl;
+	cout << "Input B is:\n" << inputM2 << endl;
+	Matrix result(4);
+	result = inputM1 * inputM2;
+	cout << "Result of A * B is:\n" << result << endl;
 	return 0;
 }
