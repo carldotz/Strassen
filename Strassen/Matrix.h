@@ -25,23 +25,25 @@ public:
 	}
 
 	virtual ~Matrix() {
-		delete [] this->data;
-		this->data = NULL;
+		if(this->data != NULL) {
+			delete [] this->data;
+			this->data = NULL;
+		}
 	}
 
 	size_t get_width() const{
 		return width;
 	}
 	Matrix & operator=(const Matrix & right);
-	Matrix operator+(Matrix & right) const;
-	Matrix operator-(Matrix & right) const;
+	Matrix operator+(const Matrix & right) const;
+	Matrix operator-(const Matrix & right) const;
 	Matrix operator*(const Matrix & right) const;
 	int & operator[](const size_t i);
 	const int & operator[](const size_t i) const;
 
 
 private:
-	Matrix basic_operation(Matrix & right, char operation) const;
+	Matrix basic_operation(const Matrix & right, char operation) const;
 	Matrix strassen(const Matrix &b) const;
 };
 

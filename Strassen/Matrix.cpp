@@ -7,7 +7,7 @@
 
 #include "Matrix.h"
 
-Matrix Matrix::basic_operation(Matrix & right, char operation) const{
+Matrix Matrix::basic_operation(const Matrix & right, char operation) const{
 	Matrix result(this->width);
 	for(size_t i=0;i< width*width;++i) {
 		switch(operation) {
@@ -20,11 +20,11 @@ Matrix Matrix::basic_operation(Matrix & right, char operation) const{
 	return result;
 }
 
-Matrix Matrix::operator+(Matrix & right) const {
+Matrix Matrix::operator+(const Matrix & right) const {
 	return basic_operation(right, '+');
 }
 
-Matrix Matrix::operator-(Matrix & right) const {
+Matrix Matrix::operator-(const Matrix & right) const {
 	return basic_operation(right, '-');
 }
 
@@ -54,11 +54,12 @@ Matrix & Matrix::operator=(const Matrix & right) {
 
 Matrix Matrix::strassen(const Matrix &b) const{
 
+	Matrix c(width);
+
 	const Matrix &a = *this;
 
 	//End Condition
 	if(width == 1) {
-		Matrix c(width);
 		c[0] = a[0] * b[0];
 		return c;
 	}
@@ -119,8 +120,7 @@ Matrix Matrix::strassen(const Matrix &b) const{
 	*sub_c[1][1] = *p[4] + *p[0] - *p[2] - *p[6];
 
 
-	//Merge test
-	Matrix c(width);
+	//	Merge
 	for(size_t i=0;i<2;++i) {
 		for(size_t j=0;j<2;++j) {
 			for(size_t y=0;y<sub_width;++y) {
@@ -131,7 +131,7 @@ Matrix Matrix::strassen(const Matrix &b) const{
 		}
 	}
 
-	//Release Memory
+	//	Release Memory
 	for(size_t i=0;i<10;++i) {
 		delete s[i];
 		s[i] = NULL;
