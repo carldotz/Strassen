@@ -7,25 +7,20 @@
 
 #include "Matrix.h"
 
-Matrix Matrix::basic_operation(const Matrix & right, char operation) const{
+Matrix Matrix::operator+(const Matrix & right) const {
 	Matrix result(this->width);
 	for(size_t i=0;i< width*width;++i) {
-		switch(operation) {
-		case '+': result[i] = (*this)[i] + right[i];
-		break;
-		case '-': result[i] = (*this)[i] - right[i];
-		break;
-		}
+		result[i] = (*this)[i] + right[i];
 	}
 	return result;
 }
 
-Matrix Matrix::operator+(const Matrix & right) const {
-	return basic_operation(right, '+');
-}
-
 Matrix Matrix::operator-(const Matrix & right) const {
-	return basic_operation(right, '-');
+	Matrix result(this->width);
+	for(size_t i=0;i< width*width;++i) {
+		result[i] = (*this)[i] - right[i];
+	}
+	return result;
 }
 
 Matrix Matrix::operator*(const Matrix & right) const {
@@ -42,10 +37,12 @@ const int & Matrix::operator[](const size_t i) const {
 
 Matrix & Matrix::operator=(const Matrix & right) {
 	if(this == &right) return *this;
-	this->width = right.width;
-	delete [] this->data;
-	this->data = NULL;
-	this->data = new int[this->width * this->width];
+	if(this->width != right.width) {
+		this->width = right.width;
+		delete [] this->data;
+		this->data = NULL;
+		this->data = new int[this->width * this->width];
+	}
 	for(size_t i=0;i<this->width * this->width;++i) {
 		(*this)[i] = right[i];
 	}

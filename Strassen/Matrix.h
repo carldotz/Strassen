@@ -41,9 +41,7 @@ public:
 	int & operator[](const size_t i);
 	const int & operator[](const size_t i) const;
 
-
 private:
-	Matrix basic_operation(const Matrix & right, char operation) const;
 	Matrix strassen(const Matrix &b) const;
 };
 
