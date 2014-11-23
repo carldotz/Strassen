@@ -118,7 +118,8 @@ Matrix Matrix::strassen(const Matrix &b) const{
 	*sub_c[1][0] = *p[2] + *p[3];
 	*sub_c[1][1] = *p[4] + *p[0] - *p[2] - *p[6];
 
-	//Merge
+
+	//Merge test
 	Matrix c(width);
 	for(size_t i=0;i<2;++i) {
 		for(size_t j=0;j<2;++j) {
