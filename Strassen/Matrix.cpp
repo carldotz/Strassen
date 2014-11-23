@@ -120,7 +120,7 @@ Matrix Matrix::strassen(const Matrix &b) const{
 	*sub_c[1][1] = *p[4] + *p[0] - *p[2] - *p[6];
 
 
-	//	Merge
+	//Merge
 	for(size_t i=0;i<2;++i) {
 		for(size_t j=0;j<2;++j) {
 			for(size_t y=0;y<sub_width;++y) {
@@ -131,7 +131,7 @@ Matrix Matrix::strassen(const Matrix &b) const{
 		}
 	}
 
-	//	Release Memory
+	//Release Memory
 	for(size_t i=0;i<10;++i) {
 		delete s[i];
 		s[i] = NULL;
